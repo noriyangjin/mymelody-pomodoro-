@@ -5,10 +5,26 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f1e7f5;
+  background: linear-gradient(45deg, #f1e7f5, #ffbbf3, #ff5e99);
+  background-size: 400% 400%;
+  animation: movingBackground 15s ease infinite;
   margin: 0;
 }
 
+/* Keyframe animation for moving background */
+@keyframes movingBackground {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* Container styles */
 .container {
   display: flex;
   flex-direction: column;
@@ -17,50 +33,105 @@ body {
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.timer {
   text-align: center;
 }
 
-.melody-icon img {
-  width: 150px;
-  height: auto;
-  margin-bottom: 20px;
+/* Timer animation */
+.timer {
+  animation: bounceIn 1s ease-out;
 }
 
-h1 {
-  font-size: 2.5em;
-  color: #ff5e99;
-  margin: 0;
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
+/* Timer display */
 .time-display {
   font-size: 3em;
   font-weight: bold;
   color: #ff3366;
   margin: 20px 0;
+  animation: pulse 1s ease-out;
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Button styles */
 button {
+  border-radius: 50px;  /* Rounded edges */
+  padding: 15px 30px;
   background-color: #ff66b2;
   color: white;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 10px;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
   background-color: #ff3385;
+  transform: scale(1.05);  /* Slightly enlarge on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.message {
-  margin-top: 15px;
-  font-size: 1.2em;
-  color: #ff5e99;
+button:focus {
+  outline: none;
+}
+
+button:active {
+  animation: buttonClick 0.3s ease;
+}
+
+@keyframes buttonClick {
+  0% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* My Melody Icon styling */
+.melody-icon img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;  /* Circle shape */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.melody-icon {
+  background-image: url('https://www.pngall.com/wp-content/uploads/13/My-Melody.png');
+  background-size: cover;
+  background-position: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
 }
 
 /* Rest options (hidden initially) */
@@ -131,45 +202,45 @@ button:hover {
 /* Styling for mobile devices */
 @media screen and (max-width: 768px) {
   body {
-      background-color: #f1e7f5;
+    background-color: #f1e7f5;
   }
 
   .container {
-      padding: 10px;
+    padding: 10px;
   }
 
   h1 {
-      font-size: 2rem; /* Smaller font size for mobile */
+    font-size: 2rem; /* Smaller font size for mobile */
   }
 
   button {
-      font-size: 1rem;
-      padding: 10px 20px; /* Adjust button size for smaller screens */
+    font-size: 1rem;
+    padding: 10px 20px; /* Adjust button size for smaller screens */
   }
 
   #rest-options button {
-      font-size: 1rem; /* Adjust button size for mobile */
-      padding: 10px 20px;
+    font-size: 1rem; /* Adjust button size for mobile */
+    padding: 10px 20px;
   }
 }
 
 /* Styling for very small screens (phones in portrait mode) */
 @media screen and (max-width: 480px) {
   .container {
-      padding: 5px;
+    padding: 5px;
   }
 
   h1 {
-      font-size: 1.5rem; /* Even smaller font size for small phones */
+    font-size: 1.5rem; /* Even smaller font size for small phones */
   }
 
   button {
-      font-size: 0.9rem;
-      padding: 8px 15px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
 
   #rest-options button {
-      font-size: 0.9rem;
-      padding: 8px 15px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
 }
