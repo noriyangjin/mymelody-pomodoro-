@@ -1,15 +1,13 @@
 let isRunning = false;
-let timeLeft = 25 * 60; // 25 minutes for Pomodoro
-let restTimeLeft = 5 * 60; // Default rest time is 5 minutes
+let timeLeft = 25 * 60; // 25 minutes
 let timerInterval;
-let restTimerInterval;
+let restInterval; // Rest timer interval
+let restTimeLeft = 0; // Variable for the rest time left
 
 const timeDisplay = document.getElementById("time-display");
 const startStopButton = document.getElementById("start-stop");
 const message = document.getElementById("message");
-const alarmSound = document.getElementById("alarm-sound");
-
-const restOptions = document.getElementById("rest-options");  // Rest duration options
+const alarmSound = document.getElementById("alarm-sound"); // Get the audio element
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -32,12 +30,13 @@ function startPomodoroTimer() {
 
     timerInterval = setInterval(() => {
         if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            alarmSound.play(); // Play sound when Pomodoro timer ends
+            clearInterval(timerInterval);  // Clear the Pomodoro timer when it finishes
+            alarmSound.play(); // Play the sound when the timer reaches 0
             message.textContent = "Time's up! Take a break.";
-            setTimeout(() => {
-                promptRestDuration(); // Show rest options after sound ends
-            }, 500); // Wait for the sound to play before showing options
+            
+            // Show rest options after Pomodoro ends
+            showRestOptions();
+            resetTimer(); // Reset the Pomodoro timer
         } else {
             timeLeft--;
             updateTimer();
@@ -45,13 +44,22 @@ function startPomodoroTimer() {
     }, 1000);
 }
 
-function startRestTimer() {
-    restTimerInterval = setInterval(() => {
+function stopPomodoroTimer() {
+    isRunning = false;
+    startStopButton.textContent = "Start";
+    clearInterval(timerInterval);  // Stop the Pomodoro timer
+    message.textContent = "Take a deep breath!";
+}
+
+function startRestTimer(duration) {
+    // Set the rest time based on user's choice (5 or 10 minutes)
+    restTimeLeft = duration * 60;
+    restInterval = setInterval(() => {
         if (restTimeLeft <= 0) {
-            clearInterval(restTimerInterval);
-            alarmSound.play(); // Play sound when rest timer ends
-            message.textContent = "Rest time's up! Get ready for the next session.";
-            resetTimer(); // Reset the timer or start a new Pomodoro
+            clearInterval(restInterval);  // Clear the rest timer when it finishes
+            alarmSound.play(); // Play the sound when the rest timer finishes
+            message.textContent = "Rest's over! Time to focus!";
+            hideRestOptions();
         } else {
             restTimeLeft--;
             updateRestTimer();
@@ -59,45 +67,18 @@ function startRestTimer() {
     }, 1000);
 }
 
-function promptRestDuration() {
-    // Show the rest options for 5 or 10-minute rest
-    restOptions.style.display = "block";
-
-    // Handle the 5-minute rest button click
-    document.getElementById("five-minute-rest").addEventListener("click", () => {
-        restTimeLeft = 5 * 60; // Set 5 minutes rest
-        restOptions.style.display = "none"; // Hide rest options
-        startRestTimer(); // Start the rest timer
-    });
-
-    // Handle the 10-minute rest button click
-    document.getElementById("ten-minute-rest").addEventListener("click", () => {
-        restTimeLeft = 10 * 60; // Set 10 minutes rest
-        restOptions.style.display = "none"; // Hide rest options
-        startRestTimer(); // Start the rest timer
-    });
+function showRestOptions() {
+    // Display rest time options (5-minute or 10-minute buttons)
+    document.getElementById('rest-options').style.display = 'block';
 }
 
-function stopRestTimer() {
-    clearInterval(restTimerInterval);
-    alarmSound.pause(); // Stop the sound
-    alarmSound.currentTime = 0; // Reset sound position to the start
-    message.textContent = "Rest timer paused.";
-}
-
-function stopPomodoroTimer() {
-    isRunning = false;
-    startStopButton.textContent = "Start";
-    clearInterval(timerInterval);
-    clearInterval(restTimerInterval); // Ensure rest timer is stopped
-    alarmSound.pause(); // Stop the sound if it's playing
-    alarmSound.currentTime = 0; // Reset sound position to the start
-    message.textContent = "Take a deep breath!";
+function hideRestOptions() {
+    // Hide the rest time options after a selection is made or rest timer finishes
+    document.getElementById('rest-options').style.display = 'none';
 }
 
 function resetTimer() {
-    timeLeft = 25 * 60;
-    restTimeLeft = 5 * 60; // Reset rest time to 5 minutes
+    timeLeft = 25 * 60;  // Reset Pomodoro timer to 25 minutes
     updateTimer();
 }
 
@@ -107,6 +88,15 @@ startStopButton.addEventListener("click", () => {
     } else {
         startPomodoroTimer();
     }
+});
+
+// Event listeners for rest time buttons (5-min and 10-min buttons)
+document.getElementById('rest-5min').addEventListener("click", () => {
+    startRestTimer(5);  // Start a 5-minute rest timer
+});
+
+document.getElementById('rest-10min').addEventListener("click", () => {
+    startRestTimer(10);  // Start a 10-minute rest timer
 });
 
 // Initial display
