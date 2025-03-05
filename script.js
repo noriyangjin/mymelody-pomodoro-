@@ -1,5 +1,5 @@
 let isRunning = false;
-let timeLeft = 25 * 60; // 25 minutes
+let timeLeft; // Time will be set based on user input
 let timerInterval;
 let restInterval; // Rest timer interval
 let restTimeLeft = 0; // Variable for the rest time left
@@ -8,6 +8,9 @@ const timeDisplay = document.getElementById("time-display");
 const startStopButton = document.getElementById("start-stop");
 const message = document.getElementById("message");
 const alarmSound = document.getElementById("alarm-sound"); // Get the audio element
+const customTimeInput = document.getElementById("custom-time"); // Get the input field for custom time
+const customTimeInputContainer = document.getElementById("custom-time-container"); // Container for the custom time input
+const gifPrompt = document.getElementById("gif-prompt"); // The GIF element to show when custom timer finishes
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -23,10 +26,29 @@ function updateRestTimer() {
     timeDisplay.textContent = formatTime(restTimeLeft);
 }
 
+function showGifPrompt() {
+    // Display the GIF for 3 seconds
+    gifPrompt.style.display = "block"; 
+    setTimeout(() => {
+        gifPrompt.style.display = "none"; // Hide the GIF after 3 seconds
+    }, 3000);
+}
+
 function startPomodoroTimer() {
+    // Set timeLeft based on the input (in minutes)
+    timeLeft = parseInt(customTimeInput.value) * 60; // Convert minutes to seconds
+    
+    if (timeLeft <= 0) {
+        message.textContent = "Please enter a valid time!";
+        return;
+    }
+
     isRunning = true;
     startStopButton.textContent = "Stop";
     message.textContent = "Focus, you got this!";
+
+    // Hide custom time input when Pomodoro timer starts
+    customTimeInputContainer.style.display = 'none';
 
     timerInterval = setInterval(() => {
         if (timeLeft <= 0) {
@@ -34,9 +56,11 @@ function startPomodoroTimer() {
             alarmSound.play(); // Play the sound when the timer reaches 0
             message.textContent = "Time's up! Take a break.";
             
+            // Show the GIF prompt only after the custom timer ends
+            showGifPrompt();
+
             // Show rest options after Pomodoro ends
             showRestOptions();
-            resetTimer(); // Reset the Pomodoro timer
         } else {
             timeLeft--;
             updateTimer();
@@ -60,6 +84,9 @@ function startRestTimer(duration) {
             alarmSound.play(); // Play the sound when the rest timer finishes
             message.textContent = "Rest's over! Time to focus!";
             hideRestOptions();
+            
+            // After rest time ends, show the custom timer input again
+            customTimeInputContainer.style.display = 'block';
         } else {
             restTimeLeft--;
             updateRestTimer();
@@ -78,7 +105,8 @@ function hideRestOptions() {
 }
 
 function resetTimer() {
-    timeLeft = 25 * 60;  // Reset Pomodoro timer to 25 minutes
+    // Reset the Pomodoro timer to the user's input value
+    timeLeft = parseInt(customTimeInput.value) * 60;  // Reset to user-defined time
     updateTimer();
 }
 
