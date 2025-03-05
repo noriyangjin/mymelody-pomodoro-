@@ -14,13 +14,13 @@ body {
 /* Keyframe animation for moving background */
 @keyframes movingBackground {
   0% {
-    background-position: 0 0;
+      background-position: 0 0;
   }
   50% {
-    background-position: 100% 100%;
+      background-position: 100% 100%;
   }
   100% {
-    background-position: 0 0;
+      background-position: 0 0;
   }
 }
 
@@ -36,6 +36,38 @@ body {
   text-align: center;
 }
 
+/* Custom time input container */
+.time-input-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.time-input-container label {
+  font-size: 1.2rem;
+  color: #ff66b2;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.time-input-container input {
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 2px solid #ff66b2;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #ff3366;
+  width: 80%;
+  max-width: 250px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.time-input-container input:focus {
+  outline: none;
+  border-color: #ff5e99;
+  box-shadow: 0 0 8px rgba(255, 94, 153, 0.5);
+}
+
 /* Timer animation */
 .timer {
   animation: bounceIn 1s ease-out;
@@ -43,13 +75,13 @@ body {
 
 @keyframes bounceIn {
   0% {
-    transform: scale(0);
+      transform: scale(0);
   }
   50% {
-    transform: scale(1.1);
+      transform: scale(1.1);
   }
   100% {
-    transform: scale(1);
+      transform: scale(1);
   }
 }
 
@@ -64,16 +96,16 @@ body {
 
 @keyframes pulse {
   0% {
-    transform: scale(1);
-    opacity: 1;
+      transform: scale(1);
+      opacity: 1;
   }
   50% {
-    transform: scale(1.05);
-    opacity: 0.7;
+      transform: scale(1.05);
+      opacity: 0.7;
   }
   100% {
-    transform: scale(1);
-    opacity: 1;
+      transform: scale(1);
+      opacity: 1;
   }
 }
 
@@ -105,13 +137,13 @@ button:active {
 
 @keyframes buttonClick {
   0% {
-    transform: scale(1.1);
+      transform: scale(1.1);
   }
   50% {
-    transform: scale(0.9);
+      transform: scale(0.9);
   }
   100% {
-    transform: scale(1);
+      transform: scale(1);
   }
 }
 
@@ -202,45 +234,67 @@ button:hover {
 /* Styling for mobile devices */
 @media screen and (max-width: 768px) {
   body {
-    background-color: #f1e7f5;
+      background-color: #f1e7f5;
   }
 
   .container {
-    padding: 10px;
+      padding: 10px;
   }
 
   h1 {
-    font-size: 2rem; /* Smaller font size for mobile */
+      font-size: 2rem; /* Smaller font size for mobile */
   }
 
   button {
-    font-size: 1rem;
-    padding: 10px 20px; /* Adjust button size for smaller screens */
+      font-size: 1rem;
+      padding: 10px 20px; /* Adjust button size for smaller screens */
   }
 
   #rest-options button {
-    font-size: 1rem; /* Adjust button size for mobile */
-    padding: 10px 20px;
+      font-size: 1rem; /* Adjust button size for mobile */
+      padding: 10px 20px;
+  }
+
+  /* Ensure the time input container is centered and works well on mobile */
+  .time-input-container input {
+      font-size: 1rem;
+      width: 100%;
+      padding: 8px;
   }
 }
 
 /* Styling for very small screens (phones in portrait mode) */
 @media screen and (max-width: 480px) {
   .container {
-    padding: 5px;
+      padding: 5px;
   }
 
   h1 {
-    font-size: 1.5rem; /* Even smaller font size for small phones */
+      font-size: 1.5rem; /* Even smaller font size for small phones */
   }
 
   button {
-    font-size: 0.9rem;
-    padding: 8px 15px;
+      font-size: 0.9rem;
+      padding: 8px 15px;
   }
 
   #rest-options button {
-    font-size: 0.9rem;
-    padding: 8px 15px;
+      font-size: 0.9rem;
+      padding: 8px 15px;
   }
 }
+
+#gif-prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Ensure it's above everything else */
+  display: none;
+}
+
+#gif-prompt img {
+  width: 150px; /* Adjust the size of the GIF */
+  height: auto;
+}
+
