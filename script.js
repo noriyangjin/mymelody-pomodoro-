@@ -13,11 +13,15 @@ const customTimeInputContainer = document.getElementById("custom-time-container"
 const gifPrompt = document.getElementById("gif-prompt"); // The GIF element to show when custom timer finishes
 
 function formatTime(seconds) {
+    // Check if the seconds value is valid
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";  // Return "00:00" if the value is invalid
+    }
+
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes < 10 ? '0' + minutes : minutes}:${secs < 10 ? '0' + secs : secs}`;
 }
-
 function updateTimer() {
     timeDisplay.textContent = formatTime(timeLeft);
 }
