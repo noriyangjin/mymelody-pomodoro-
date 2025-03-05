@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="timer">
+            <div class="melody-icon">
+                <img src="https://www.pngall.com/wp-content/uploads/13/My-Melody.png" alt="Melody" />
+            </div>
+            <h1>Pomodoro Timer</h1>
+            <div id="time-display" class="time-display">25:00</div>
+            <button id="start-stop" class="start-stop">Start</button>
+            <div class="message" id="message"></div>
+
+<!-- Rest Time Options (Hidden initially) -->
+<div id="rest-options" style="display: none;">
+    <button id="five-minute-rest">
+        <img src="https://www.pngall.com/wp-content/uploads/13/My-Melody-PNG-Free-Image.png" alt="My Melody" />
+        5 Minute Rest
+    </button>
+    <button id="ten-minute-rest">
+        <img src="https://th.bing.com/th/id/OIP.-NGrInmuQWpzDQS7x6rd8gHaHa?w=512&h=512&rs=1&pid=ImgDetMain" alt="My Melody" />
+        10 Minute Rest
+    </button>
+</div>
+
+        </div>
+    </div>
+
+    <!-- Add audio element -->
+    <audio id="alarm-sound" src="alarm.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

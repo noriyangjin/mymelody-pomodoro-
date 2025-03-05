@@ -1,0 +1,175 @@
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f1e7f5;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffbbf3;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.timer {
+  text-align: center;
+}
+
+.melody-icon img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #ff5e99;
+  margin: 0;
+}
+
+.time-display {
+  font-size: 3em;
+  font-weight: bold;
+  color: #ff3366;
+  margin: 20px 0;
+}
+
+button {
+  background-color: #ff66b2;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff3385;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 1.2em;
+  color: #ff5e99;
+}
+
+/* Rest options (hidden initially) */
+#rest-options {
+  display: none;
+  margin-top: 20px;
+}
+
+#rest-options button {
+  background-color: #66ccff;
+  color: white;
+  font-size: 1.2em;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between text and image */
+}
+
+#rest-options button:hover {
+  background-color: #3399cc;
+}
+
+#rest-options button img {
+  width: 30px; /* Adjust the size of My Melody image */
+  height: auto;
+  border-radius: 50%;
+}
+
+/* Basic styling for desktop */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #ff66b2;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  background-color: #ff66b2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3385;
+}
+
+/* Styling for mobile devices */
+@media screen and (max-width: 768px) {
+  body {
+      background-color: #f1e7f5;
+  }
+
+  .container {
+      padding: 10px;
+  }
+
+  h1 {
+      font-size: 2rem; /* Smaller font size for mobile */
+  }
+
+  button {
+      font-size: 1rem;
+      padding: 10px 20px; /* Adjust button size for smaller screens */
+  }
+
+  #rest-options button {
+      font-size: 1rem; /* Adjust button size for mobile */
+      padding: 10px 20px;
+  }
+}
+
+/* Styling for very small screens (phones in portrait mode) */
+@media screen and (max-width: 480px) {
+  .container {
+      padding: 5px;
+  }
+
+  h1 {
+      font-size: 1.5rem; /* Even smaller font size for small phones */
+  }
+
+  button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+  }
+
+  #rest-options button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+  }
+}
